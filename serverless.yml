@@ -1,0 +1,51 @@
+service: socio-computing-experiment
+
+provider:
+  name: aws
+  runtime: python3.8
+  
+  iamRoleStatements:
+    # SSM Parameter
+    - Effect: Allow
+      Action:
+        - ssm:GetParameters
+        - ssm:GetParameter
+      Resource: "arn:aws:ssm:us-east-1:*:parameter/*"
+    - Effect: Allow
+      Action:
+        - ssm:DescribeParameters
+      Resource: "*"
+
+      # DynamoDB Parameter
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: 'arn:aws:dynamodb:us-east-1:*:*'
+
+functions:
+  data-collector:
+    handler: handler.dataCollector
+    events:
+      - schedule: rate(2 hours)
+
+resources: 
+  Resources:
+    tweetsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: tweet_info
+        AttributeDefinitions:
+          - AttributeName: tweet_id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: tweet_id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
