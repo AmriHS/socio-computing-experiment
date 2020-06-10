@@ -5,15 +5,28 @@ provider:
   runtime: python3.8
   
   iamRoleStatements:
+    # SSM Parameter
     - Effect: Allow
       Action:
         - ssm:GetParameters
         - ssm:GetParameter
-      Resource: "arn:aws:ssm:*:*:parameter/*"
+      Resource: "arn:aws:ssm:us-east-1:*:parameter/*"
     - Effect: Allow
       Action:
         - ssm:DescribeParameters
       Resource: "*"
+
+      # DynamoDB Parameter
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: 'arn:aws:dynamodb:us-east-1:*:*'
 
 functions:
   data-collector:
