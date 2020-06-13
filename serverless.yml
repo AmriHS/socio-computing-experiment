@@ -3,7 +3,20 @@ service: socio-computing-experiment
 provider:
   name: aws
   runtime: python3.8
+
+  custom:
+    pythonRequirements:
+      dockerizePip: true
   
+  plugins:
+    - serverless-python-requirements
+  
+  package:
+    exclude:
+      - requirements.txt
+      - serverless.yml
+      - README.md
+
   iamRoleStatements:
     # SSM Parameter
     - Effect: Allow
@@ -11,12 +24,8 @@ provider:
         - ssm:GetParameters
         - ssm:GetParameter
       Resource: "arn:aws:ssm:us-east-1:*:parameter/*"
-    - Effect: Allow
-      Action:
-        - ssm:DescribeParameters
-      Resource: "*"
 
-      # DynamoDB Parameter
+    # DynamoDB Parameter
     - Effect: Allow
       Action:
         - dynamodb:DescribeTable
@@ -26,14 +35,26 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
+        - dynamodb:BatchWriteItem
       Resource: 'arn:aws:dynamodb:us-east-1:*:*'
+
+    # SES
+    - Effect: "Allow"
+      Action:
+        - "ses:SendEmail"
+      Resource:
+        - "arn:aws:ses:us-east-1:*:*"
+      Condition:
+        StringEquals:
+          ses:FromAddress:
+            - "sociocomputing22@gmail.com"
 
 functions:
   data-collector:
     handler: handler.dataCollector
     events:
       - schedule: rate(2 hours)
-
+      
 resources: 
   Resources:
     tweetsTable:
