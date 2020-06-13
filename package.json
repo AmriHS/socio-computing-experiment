@@ -1,0 +1,23 @@
+{
+  "name": "socio-computing-experiment",
+  "description": "",
+  "version": "1.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "serverless-python-requirements": "^5.1.0"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmriHS/socio-computing-experiment.git"
+  },
+  "author": "Hassan Alamri",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AmriHS/socio-computing-experiment/issues"
+  },
+  "homepage": "https://github.com/AmriHS/socio-computing-experiment#readme"
+}
