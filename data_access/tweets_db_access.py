@@ -7,6 +7,9 @@ table = dynamodb_resource.Table('tweet_info')
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 
+def count():
+    return table.count()
+
 def insert_all(tweets): 
     """Persist batch of tweets into dynamodb."""
     log.info("Insert tweets with a length of %d", len(tweets))

@@ -1,0 +1,8 @@
+{
+    "Template": {
+      "TemplateName": "SuccessfullTemplate",
+      "SubjectPart": "Successfull Tweets Retrieval",
+      "HtmlPart": "<h1>Failed to retrieve tweets due to the following reason:</h1><p>{{failure_reason}}</p>",
+      "TextPart": "Failed to retrieve tweets due to the following reason:\r\n{{failure_reason}}"
+    }
+  }

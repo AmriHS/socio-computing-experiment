@@ -2,8 +2,11 @@
   "name": "socio-computing-experiment",
   "description": "",
   "version": "1.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "serverless-dynamodb-local": "^0.2.35"
+  },
   "devDependencies": {
+    "serverless-offline": "^6.4.0",
     "serverless-python-requirements": "^5.1.0"
   },
   "main": "index.js",

@@ -7,10 +7,10 @@ provider:
   custom:
     pythonRequirements:
       dockerizePip: true
-  
-  plugins:
-    - serverless-python-requirements
-  
+    dynamodb:
+      start:
+        migrate: true
+        
   package:
     exclude:
       - requirements.txt
@@ -49,11 +49,16 @@ provider:
           ses:FromAddress:
             - "sociocomputing22@gmail.com"
 
+plugins:
+  - serverless-python-requirements
+  - serverless-offline
+  - serverless-dynamodb-local
+
 functions:
   data-collector:
     handler: handler.dataCollector
-    events:
-      - schedule: rate(2 hours)
+    #events:
+    #  - schedule: rate(2 hours)
       
 resources: 
   Resources:

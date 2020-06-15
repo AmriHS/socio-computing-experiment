@@ -1,0 +1,8 @@
+{
+    "Template": {
+      "TemplateName": "SuccessfullTemplate",
+      "SubjectPart": "Failure Tweets Retrieval",
+      "HtmlPart": "<h1>{{tweet_counts}} have been successfully retrieved,</h1><p>Number of tweets in databases is {{db_counts}} tweets.</p>",
+      "TextPart": "{{tweet_counts}} have been successfully retrieved,\r\nNumber of tweets in databases is {{db_counts}} tweets.."
+    }
+  }
